@@ -85,11 +85,7 @@ function play() {
                     bird_props.top < pipe_sprite_props.top + pipe_sprite_props.height &&
                     bird_props.top + bird_props.height > pipe_sprite_props.top
                 ) {
-                    game_state = 'End';
-                    message.innerHTML = 'Game Over'.fontcolor('red');
-                    message.classList.add('messageStyle');
-                    img.style.display = 'none';
-                    sound_die.play();
+                    endGame();
                     return;
                 } else {
                     if (
@@ -116,9 +112,7 @@ function play() {
         bird_dy = bird_dy + gravity;
 
         if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
-            game_state = 'End';
-            message.style.left = '28vw';
-            message.classList.remove('messageStyle');
+            endGame();
             return;
         }
 
@@ -158,3 +152,19 @@ function play() {
     }
     requestAnimationFrame(createPipe);
 }
+
+// Function to end the game
+function endGame() {
+    game_state = 'End';
+    message.innerHTML = 'Game Over'.fontcolor('red');
+    message.classList.add('messageStyle');
+    img.style.display = 'none';
+    sound_die.play();
+    setTimeout(() => {
+        // Reload the page after 3 seconds to start again
+        location.reload();
+    }, 3000);
+}
+
+// Start the game initially
+startGame();
