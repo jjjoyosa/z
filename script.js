@@ -175,8 +175,24 @@ function play(){
     requestAnimationFrame(create_pipe);
 }
 
-// Function to handle gameplay on mobile devices
 function playMobile(){
+    // Variable to track whether the bird is currently flapping
+    let isFlapping = false;
+
+    // Event listener for touchstart to trigger flapping
+    document.addEventListener('touchstart', () => {
+        if(game_state == 'Play' && !isFlapping){
+            isFlapping = true; // Set flap status
+            flapBird(); // Call the function to flap the bird
+        }
+    });
+
+    // Function to flap the bird
+    function flapBird() {
+        img.src = 'images/Bird-2.png';
+        bird_dy = -6;
+    }
+
     function move(){
         if(game_state != 'Play') return;
 
@@ -211,21 +227,17 @@ function playMobile(){
     let bird_dy = 0;
     function apply_gravity(){
         if(game_state != 'Play') return;
-                bird_dy + gravity;
+        bird_dy = bird_dy + gravity;
 
-        // Touch event handling for flapping the bird
-        document.addEventListener('touchstart', () => {
-            if(game_state == 'Play'){
-                img.src = 'images/Bird-2.png';
-                bird_dy = -6;
-            }
-        });
+        // Reset flap status after gravity applies
+        isFlapping = false;
 
-        document.addEventListener('touchend', () => {
-            if(game_state == 'Play'){
-                img.src = 'images/Bird.png';
-            }
-        });
+        // Change bird image to flapping state if it's still flapping
+        if (bird_dy < 0) {
+            img.src = 'images/Bird-2.png';
+        } else {
+            img.src = 'images/Bird.png';
+        }
 
         if(bird_props.top <= 0 || bird_props.bottom >= background.bottom){
             game_state = 'End';
@@ -270,4 +282,3 @@ function playMobile(){
     }
     requestAnimationFrame(create_pipe);
 }
-
