@@ -19,21 +19,46 @@ img.style.display = 'none';
 message.classList.add('messageStyle');
 
 document.addEventListener('keydown', (e) => {
-    
     if(e.key == 'Enter' && game_state != 'Play'){
-        document.querySelectorAll('.pipe_sprite').forEach((e) => {
-            e.remove();
-        });
-        img.style.display = 'block';
-        bird.style.top = '40vh';
-        game_state = 'Play';
-        message.innerHTML = '';
-        score_title.innerHTML = 'Score : ';
-        score_val.innerHTML = '0';
-        message.classList.remove('messageStyle');
-        play();
+        startGame();
     }
 });
+
+document.addEventListener('touchstart', () => {
+    if(game_state != 'Play'){
+        startGame();
+    } else {
+        flapBird();
+    }
+});
+
+function flapBird() {
+    img.src = 'images/Bird-2.png';
+    bird_dy = -6;
+}
+
+document.addEventListener('touchend', () => {
+    if(game_state == 'Play'){
+        img.src = 'images/Bird.png';
+    }
+});
+
+function startGame() {
+    document.querySelectorAll('.pipe_sprite').forEach((e) => {
+        e.remove();
+    });
+    img.style.display = 'block';
+    bird.style.top = '40vh';
+    game_state = 'Play';
+    message.innerHTML = '';
+    score_title.innerHTML = 'Score : ';
+    score_val.innerHTML = '0';
+    message.classList.remove('messageStyle');
+    play();
+}
+
+// Rest of your code remains the same...
+
 
 function play(){
     function move(){
