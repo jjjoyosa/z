@@ -57,8 +57,6 @@ function startGame() {
     play();
 }
 
-// Rest of your code remains the same...
-
 
 function play(){
     function move(){
