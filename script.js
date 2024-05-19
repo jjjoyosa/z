@@ -1,10 +1,10 @@
 // Define different speeds and dimensions for mobile
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-let move_speed = isMobile ? 8 : 2; // Increased move speed for mobile
+let move_speed = isMobile ? 6 : 2; // Increased move speed for mobile
 let gravity = isMobile ? 1 : 0.2; // Increased gravity for mobile
 let bird_flap = isMobile ? -16 : -6; // Increased flap speed for mobile
-let pipe_separation_interval = isMobile ? 50 : 170;
+let pipe_separation_interval = isMobile ? 40 : 170;
 let pipe_gap = isMobile ? 35 : 35; // Increased pipe gap for better visibility
 let pipe_width = isMobile ? 70 : 80; // Increased pipe width for better interaction
 
@@ -24,8 +24,7 @@ let message = document.querySelector('.message');
 let score_title = document.querySelector('.score_title');
 
 let game_state = 'Start';
-img.style.width = isMobile ? '30px' : '50px'; // Reduce bird image size for mobile
-message.classList.add('messageStyle');
+
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && game_state !== 'Play') {
@@ -46,6 +45,8 @@ function startGame() {
     img.style.display = 'block';
     bird.style.top = isMobile ? '30vh' : '40vh';
     game_state = 'Play';
+    img.style.width = isMobile ? '45px' : '50px'; // Reduce bird image size for mobile
+    message.classList.add('messageStyle');
     message.innerHTML = '';
     score_title.innerHTML = 'Score : ';
     score_val.innerHTML = '0';
