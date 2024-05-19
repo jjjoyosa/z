@@ -1,4 +1,12 @@
-let move_speed = 2, gravity = 0.2;
+// Define different speeds and dimensions for mobile
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+let move_speed = isMobile ? 4 : 2;
+let gravity = isMobile ? 0.3 : 0.2;
+let bird_flap = isMobile ? -8 : -6;
+let pipe_separation_interval = isMobile ? 150 : 170;
+let pipe_gap = isMobile ? 30 : 35;
+
 let bird = document.querySelector('.bird');
 let img = document.getElementById('bird-1');
 let sound_point = new Audio('sounds effect/point.mp3');
@@ -35,7 +43,7 @@ function startGame() {
         e.remove();
     });
     img.style.display = 'block';
-    bird.style.top = '40vh';
+    bird.style.top = isMobile ? '30vh' : '40vh';
     game_state = 'Play';
     message.innerHTML = '';
     score_title.innerHTML = 'Score : ';
@@ -90,7 +98,7 @@ function play() {
     function apply_gravity() {
         if (game_state !== 'Play') return;
         bird_dy += gravity;
-        
+
         bird.style.top = bird_props.top + bird_dy + 'px';
         bird_props = bird.getBoundingClientRect();
 
@@ -108,7 +116,7 @@ function play() {
 
     function flap() {
         img.src = 'images/Bird-2.png';
-        bird_dy = -6;
+        bird_dy = bird_flap;
     }
 
     function resetFlap() {
@@ -135,14 +143,13 @@ function play() {
         resetFlap();
     });
 
-    let pipe_seperation = 0;
-    let pipe_gap = 35;
+    let pipe_separation = 0;
 
     function create_pipe() {
         if (game_state !== 'Play') return;
 
-        if (pipe_seperation > 170) {
-            pipe_seperation = 0;
+        if (pipe_separation > pipe_separation_interval) {
+            pipe_separation = 0;
 
             let pipe_posi = Math.floor(Math.random() * 43) + 8;
             let pipe_sprite_inv = document.createElement('div');
@@ -158,7 +165,7 @@ function play() {
             pipe_sprite.increase_score = '1';
             document.body.appendChild(pipe_sprite);
         }
-        pipe_seperation++;
+        pipe_separation++;
         requestAnimationFrame(create_pipe);
     }
     requestAnimationFrame(create_pipe);
