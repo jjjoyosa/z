@@ -1,12 +1,12 @@
 // Define different speeds and dimensions for mobile
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-let move_speed = isMobile ? 10 : 2; // Increased move speed for mobile
-let gravity = isMobile ? 1.2 : 0.2; // Increased gravity for mobile
-let bird_flap = isMobile ? -16 : -6; // Increased flap speed for mobile
+let move_speed = isMobile ? 8 : 2; // Increased move speed for mobile
+let gravity = isMobile ? 0.8 : 0.2; // Increased gravity for mobile
+let bird_flap = isMobile ? -14 : -6; // Increased flap speed for mobile
 let pipe_separation_interval = isMobile ? 130 : 170;
-let pipe_gap = isMobile ? 25 : 35; // Decreased pipe gap for mobile
-let pipe_width = isMobile ? 60 : 80; // Decreased pipe width for mobile
+let pipe_gap = isMobile ? 50 : 35; // Increased pipe gap for better visibility
+let pipe_width = isMobile ? 100 : 80; // Increased pipe width for better interaction
 
 let bird = document.querySelector('.bird');
 let img = document.getElementById('bird-1');
@@ -24,8 +24,7 @@ let message = document.querySelector('.message');
 let score_title = document.querySelector('.score_title');
 
 let game_state = 'Start';
-img.style.width = isMobile ? '50px' : '80px'; // Reduce bird image size for mobile
-img.style.height = isMobile ? '50px' : '80px'; // Make bird image square for mobile
+img.style.width = isMobile ? '30px' : '50px'; // Reduce bird image size for mobile
 message.classList.add('messageStyle');
 
 document.addEventListener('keydown', (e) => {
@@ -114,7 +113,6 @@ function play() {
 
         requestAnimationFrame(apply_gravity);
     }
-
     requestAnimationFrame(apply_gravity);
 
     function flap() {
@@ -175,4 +173,3 @@ function play() {
     }
     requestAnimationFrame(create_pipe);
 }
-
