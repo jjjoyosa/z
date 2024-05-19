@@ -1,11 +1,12 @@
 // Define different speeds and dimensions for mobile
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-let move_speed = isMobile ? 6 : 2;
-let gravity = isMobile ? 0.5 : 0.2;
-let bird_flap = isMobile ? -10 : -6;
+let move_speed = isMobile ? 8 : 2; // Increased move speed for mobile
+let gravity = isMobile ? 0.8 : 0.2; // Increased gravity for mobile
+let bird_flap = isMobile ? -14 : -6; // Increased flap speed for mobile
 let pipe_separation_interval = isMobile ? 130 : 170;
-let pipe_gap = isMobile ? 30 : 35;
+let pipe_gap = isMobile ? 50 : 35; // Increased pipe gap for better visibility
+let pipe_width = isMobile ? 100 : 80; // Increased pipe width for better interaction
 
 let bird = document.querySelector('.bird');
 let img = document.getElementById('bird-1');
@@ -23,7 +24,7 @@ let message = document.querySelector('.message');
 let score_title = document.querySelector('.score_title');
 
 let game_state = 'Start';
-img.style.display = 'none';
+img.style.width = isMobile ? '30px' : '50px'; // Reduce bird image size for mobile
 message.classList.add('messageStyle');
 
 document.addEventListener('keydown', (e) => {
@@ -103,11 +104,10 @@ function play() {
         bird_props = bird.getBoundingClientRect();
 
         if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
-             game_state = 'End';
-                    message.innerHTML = 'Game Over'.fontcolor('red');
-                    message.classList.add('messageStyle');
-                    img.style.display = 'none';
-                    sound_die.play();
+            game_state = 'End';
+            message.style.left = '28vw';
+            window.location.reload();
+            message.classList.remove('messageStyle');
             return;
         }
 
@@ -157,12 +157,14 @@ function play() {
             pipe_sprite_inv.className = 'pipe_sprite';
             pipe_sprite_inv.style.top = pipe_posi - 70 + 'vh';
             pipe_sprite_inv.style.left = '100vw';
+            pipe_sprite_inv.style.width = pipe_width + 'px'; // Set pipe width
             document.body.appendChild(pipe_sprite_inv);
 
             let pipe_sprite = document.createElement('div');
             pipe_sprite.className = 'pipe_sprite';
             pipe_sprite.style.top = pipe_posi + pipe_gap + 'vh';
             pipe_sprite.style.left = '100vw';
+            pipe_sprite.style.width = pipe_width + 'px'; // Set pipe width
             pipe_sprite.increase_score = '1';
             document.body.appendChild(pipe_sprite);
         }
