@@ -16,7 +16,7 @@ let game_state = 'Start';
 img.style.display = 'none';
 message.classList.add('messageStyle');
 
-document.addEventListener('click', () => {
+function startGame() {
     if (game_state != 'Play') {
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
             e.remove();
@@ -33,7 +33,10 @@ document.addEventListener('click', () => {
         img.src = 'images/Bird-2.png';
         bird_dy = -6;
     }
-});
+}
+
+document.addEventListener('click', startGame);
+document.addEventListener('touchstart', startGame);
 
 function play() {
     function move() {
