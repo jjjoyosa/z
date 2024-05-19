@@ -1,10 +1,10 @@
 // Define different speeds and dimensions for mobile
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-let move_speed = isMobile ? 4 : 2;
-let gravity = isMobile ? 0.3 : 0.2;
-let bird_flap = isMobile ? -8 : -6;
-let pipe_separation_interval = isMobile ? 150 : 170;
+let move_speed = isMobile ? 6 : 2;
+let gravity = isMobile ? 0.5 : 0.2;
+let bird_flap = isMobile ? -10 : -6;
+let pipe_separation_interval = isMobile ? 130 : 170;
 let pipe_gap = isMobile ? 30 : 35;
 
 let bird = document.querySelector('.bird');
@@ -103,10 +103,11 @@ function play() {
         bird_props = bird.getBoundingClientRect();
 
         if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
-            game_state = 'End';
-            message.style.left = '28vw';
-            window.location.reload();
-            message.classList.remove('messageStyle');
+             game_state = 'End';
+                    message.innerHTML = 'Game Over'.fontcolor('red');
+                    message.classList.add('messageStyle');
+                    img.style.display = 'none';
+                    sound_die.play();
             return;
         }
 
