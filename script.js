@@ -4,9 +4,9 @@ const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 let move_speed = isMobile ? 8 : 2; // Increased move speed for mobile
 let gravity = isMobile ? 1 : 0.2; // Increased gravity for mobile
 let bird_flap = isMobile ? -16 : -6; // Increased flap speed for mobile
-let pipe_separation_interval = isMobile ? 100 : 170;
-let pipe_gap = isMobile ? 25 : 35; // Increased pipe gap for better visibility
-let pipe_width = isMobile ? 50 : 80; // Increased pipe width for better interaction
+let pipe_separation_interval = isMobile ? 50 : 170;
+let pipe_gap = isMobile ? 35 : 35; // Increased pipe gap for better visibility
+let pipe_width = isMobile ? 70 : 80; // Increased pipe width for better interaction
 
 let bird = document.querySelector('.bird');
 let img = document.getElementById('bird-1');
