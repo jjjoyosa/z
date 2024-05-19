@@ -5,7 +5,7 @@ let move_speed = isMobile ? 7 : 2; // Increased move speed for mobile
 let gravity = isMobile ? 0.9 : 0.2; // Increased gravity for mobile
 let bird_flap = isMobile ? -14 : -6; // Increased flap speed for mobile
 let pipe_separation_interval = isMobile ? 45 : 170;
-let pipe_gap = isMobile ? 40 : 35; // Increased pipe gap for better visibility
+let pipe_gap = isMobile ? 30 : 35; // Increased pipe gap for better visibility
 let pipe_width = isMobile ? 50 : 80; // Increased pipe width for better interaction
 
 let bird = document.querySelector('.bird');
